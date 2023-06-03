@@ -3,9 +3,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
-driver = webdriver.Chrome()
+driver=webdriver.Chrome()
 driver.get("https://www.flipkart.com/")
 driver.maximize_window()
-wait= WebDriverWait(driver,10)
+wait= WebDriverWait(driver,60)
 wait.until(expected_conditions.visibility_of_element_located((By.XPATH,"//span[contains(text(),'Cart')]")))
 driver.quit()
