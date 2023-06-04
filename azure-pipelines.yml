@@ -27,12 +27,21 @@ steps:
 
 
 
+#- task: PythonScript@0
+#  inputs:
+#    scriptSource: 'filePath'
+#    scriptPath: 'test_automation1.py'
+#  displayName: 'Run python tests'  
 - task: PythonScript@0
   inputs:
-    scriptSource: 'filePath'
-    scriptPath: 'test_automation1.py'
-  displayName: 'Run python tests'  
+    scriptSource: 'inline'
+    script: 'pytest --html=report.html'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    artifact: 'test_reports'
+    publishLocation: 'pipeline'
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.xml'
+    testResultsFiles: '**/TEST-*.html'
