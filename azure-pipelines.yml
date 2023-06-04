@@ -32,10 +32,9 @@ steps:
 #    scriptSource: 'filePath'
 #    scriptPath: 'test_automation1.py'
 #  displayName: 'Run python tests'  
-- task: PythonScript@0
+- task: CmdLine@2
   inputs:
-    scriptSource: 'inline'
-    script: 'pytest --html=report.html'
+    script: 'python -m pytest --html=report.html --self-contained-html'
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Pipeline.Workspace)'
@@ -44,4 +43,4 @@ steps:
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
-    testResultsFiles: '**/TEST-*.html'
+    testResultsFiles: 'report.html'
