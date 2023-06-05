@@ -34,7 +34,7 @@ steps:
 #  displayName: 'Run python tests'  
 - task: CmdLine@2
   inputs:
-    script: 'python -m pytest --html=report.html --self-contained-html --doctest-modules --nunitxml=nunit/test-results.xml'
+    script: 'python -m pytest -m $(test_case_mark) --html=report.html --self-contained-html --doctest-modules --nunitxml=nunit/test-results.xml'
 - task: PublishPipelineArtifact@1
   inputs:
     targetPath: '$(Pipeline.Workspace)'
