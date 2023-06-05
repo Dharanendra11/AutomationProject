@@ -1,8 +1,10 @@
+import pytest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+@pytest.mark.first
 def test_homepage():
     driver=webdriver.Chrome()
     driver.get("https://www.flipkart.com/")
