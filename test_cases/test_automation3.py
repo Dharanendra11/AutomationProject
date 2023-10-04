@@ -45,7 +45,7 @@ def test_launchGoogle(setUp):
     hospital_website = driver.current_url
     print(hospital_website)
     time.sleep(2)
-    driver.quit()
+
 
 
 
