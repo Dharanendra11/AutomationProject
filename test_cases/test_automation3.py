@@ -1,10 +1,4 @@
-# import requests
-# session = requests.session()
-# url = r"https://google.com"
-# page = session.get(url)
-# print(page.status_code)
 import time
-
 import pytest
 from selenium import webdriver
 from selenium.webdriver import Keys
@@ -12,12 +6,21 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+@pytest.fixture
+def setUp(browser):
+    assert browser == 'chrome', 'Browser not available'
+    driver = webdriver.Chrome()
+    yield driver
+    driver.quit()
+
+
 
 #@pytest.mark.usefixtures("log_on_failure")
 @pytest.mark.yelp
-def test_launchGoogle(browser):
-    assert browser == 'chrome','Browser not available'
-    driver = webdriver.Chrome()
+def test_launchGoogle(setUp):
+    # assert browser == 'chrome','Browser not available'
+    # driver = webdriver.Chrome()
+    driver = setUp
     driver.get("https://www.yelp.com/")
     driver.maximize_window()
     WebDriverWait(driver,10).until(expected_conditions.visibility_of_element_located((By.NAME,'find_desc')))
@@ -47,9 +50,3 @@ def test_launchGoogle(browser):
 
 
 
-# def test_launchYoutube(browser):
-#     assert browser == 'chrome','Browser not available'
-#     driver = webdriver.Chrome()
-#     driver.get("https://youtube.com")
-#     time.sleep(10)
-#     driver.quit()
