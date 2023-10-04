@@ -48,8 +48,8 @@ def test_launchGoogle(setUp):
     WebDriverWait(driver, 20).until(expected_conditions.visibility_of_element_located((By.XPATH, "//a[contains(text(),'University of California')]")))
     hospital_website = driver.current_url
     print(hospital_website)
+    assert hospital_website == 'https://emergency.ucsf.edu/', 'wrong url'
     time.sleep(2)
-
 
 
 
