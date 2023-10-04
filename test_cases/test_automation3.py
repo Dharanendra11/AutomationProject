@@ -8,8 +8,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 
 @pytest.fixture
 def setUp(browser):
-    assert browser == 'chrome', 'Browser not available'
-    driver = webdriver.Chrome()
+    if browser == 'chrome':
+        driver = webdriver.Chrome()
+    elif browser == 'edge':
+        driver = webdriver.Edge()
+    else:
+        print('Browser not available.')
     yield driver
     driver.quit()
 
